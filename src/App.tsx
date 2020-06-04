@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { PageContainer, PlayerContainer, NavContainer } from './containers';
+import { StateProvider } from './state';
 
-function App() {
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark'
+  }
+});
+
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <StateProvider>
+        <NavContainer />
+        <PageContainer />
+        <PlayerContainer />
+      </StateProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;
