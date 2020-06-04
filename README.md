@@ -1,4 +1,4 @@
-A podcast web client using itunes api, built with React.
+A podcast webapp using itunes api, built with React.
 
 # Demo
 https://grops-podcast.herokuapp.com/
