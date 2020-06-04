@@ -23,11 +23,15 @@ export async function getEpisodes(feedUrl: string) {
     const innerHtml = parser.parseFromString(element.innerHTML, "text/html");
     
     episodes.push({
-      title: innerHtml.getElementsByTagName('title')[0].innerHTML,
+      title: escapeXMLFormat(innerHtml.getElementsByTagName('title')[0].innerHTML),
       description: innerHtml.getElementsByTagName('description')[0].innerHTML,
       url: innerHtml.getElementsByTagName('enclosure')[0].attributes.getNamedItem('url')!.value
     })
   }
 
   return episodes;
+}
+
+function escapeXMLFormat(data: string) {
+  return data.replace('&lt;![CDATA[', '').replace(']]&gt;', '');
 }
