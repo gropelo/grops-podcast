@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { search } from '../services/app.service';
 import { Status, IPodcasts } from '../types/app.types';
+import Axios from 'axios';
 
 export function useSearch(query: string): [IPodcasts, Status] {
   const [results, setResults] = useState<IPodcasts>([]);
@@ -15,7 +16,11 @@ export function useSearch(query: string): [IPodcasts, Status] {
         setResults(podcasts);
         setStatus(Status.READY);
       }).catch(err => {
-        setStatus(Status.ERROR);
+        if (Axios.isCancel(err)) {
+          setStatus(Status.LOADING);
+        } else {
+          setStatus(Status.ERROR);
+        }
       });
   }, [query]);
 
