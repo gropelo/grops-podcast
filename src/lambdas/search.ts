@@ -14,18 +14,10 @@ export async function handler(event: any, context: Context) {
       pictureUrl: result.artworkUrl30
     }));
 
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify(result)
-    };
+    return { statusCode: 200, headers: corsHeaders, body: JSON.stringify(result) };
   } catch (err) {
     console.error(err);
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify(err)
-    };
+    return { statusCode: 500, headers: corsHeaders, body: JSON.stringify(err) };
   }
 };
 

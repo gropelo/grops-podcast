@@ -29,18 +29,10 @@ export async function handler(event: any, context: Context) {
       if (i === 25) break;
     }
 
-    return {
-      statusCode: 200,
-      headers: corsHeaders,
-      body: JSON.stringify(episodes)
-    };
+    return { statusCode: 200, headers: corsHeaders, body: JSON.stringify(episodes) };
   } catch (err) {
     console.error(err);
-    return {
-      statusCode: 500,
-      headers: corsHeaders,
-      body: JSON.stringify(err)
-    };
+    return { statusCode: 500, headers: corsHeaders, body: JSON.stringify(err) };
   }
 };
 
