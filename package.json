@@ -14,7 +14,6 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "axios": "^0.19.2",
-    "concurrently": "^5.2.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-audio-player": "^0.13.0",
@@ -23,10 +22,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start-lambda": "netlify-lambda serve src/lambdas",
-    "start-web": "react-scripts start",
-    "start": "concurrently \"yarn start-lambda\" \"yarn start-web\"",
-    "build": "react-scripts build",
+    "start": "run-p start:**",
+    "start:app": "react-scripts start",
+    "start:lambda": "netlify-lambda serve src/lambdas",
+    "build": "run-p build:**",
+    "build:app": "react-scripts build",
+    "build:lambda": "netlify-lambda build src/lambdas",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -52,6 +53,7 @@
     "@types/aws-lambda": "^8.10.56",
     "@types/react-audio-player": "^0.11.0",
     "babel-loader": "^8.1.0",
-    "netlify-lambda": "^1.6.3"
+    "netlify-lambda": "^1.6.3",
+    "npm-run-all": "^4.1.5"
   }
 }
