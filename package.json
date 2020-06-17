@@ -23,11 +23,12 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start-lambda": "netlify-lambda serve src/lambdas",
+    "start-lambda": "netlify-lambda serve",
     "start-web": "react-scripts start",
     "start": "concurrently \"yarn start-lambda\" \"yarn start-web\"",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
