@@ -1,19 +1,34 @@
-import { search as itunesSearch } from './itunes.service';
 import { IPodcasts, IEpisodes } from '../types/app.types';
-import { getFeeds } from './feed.service';
+import axios, { CancelTokenSource } from 'axios';
+import { ISearchResult } from '../types/itunes.types';
+
+const hostname = process.env.REACT_APP_HOSTNAME || '';
+
+let currentToken: CancelTokenSource;
 
 export async function search(query: string): Promise<IPodcasts> {
-  return itunesSearch(query).then(response => {
-    return response.data.results.map(result => ({
-      title: result.collectionName,
-      feedUrl: result.feedUrl,
-      pictureUrl: result.artworkUrl30
-    }));
-  });
+  if (currentToken) {
+    currentToken.cancel();
+  }
+
+  const CancelToken = axios.CancelToken;
+  currentToken = CancelToken.source();
+
+  const response = await axios.get<ISearchResult>(`${hostname}/.netlify/functions/search?query=${query}`, { cancelToken: currentToken.token});
+  currentToken = undefined!;
+
+  return response.data.results.map(result => ({
+    title: result.collectionName,
+    feedUrl: result.feedUrl,
+    pictureUrl: result.artworkUrl30
+  }));
 }
 
 export async function getEpisodes(feedUrl: string) {
-  const xmlDoc = await getFeeds(feedUrl);
+  const response = await axios.get(`${hostname}/.netlify/functions/feeds?feedUrl=${feedUrl}`);
+  
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(response.data, "text/xml");
   const list = xmlDoc.getElementsByTagName('item');
   const episodes: IEpisodes = [];
 

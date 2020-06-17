@@ -23,7 +23,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start-lambda": "netlify-lambda serve",
+    "start-lambda": "netlify-lambda serve src/lambdas",
     "start-web": "react-scripts start",
     "start": "concurrently \"yarn start-lambda\" \"yarn start-web\"",
     "build": "react-scripts build",
@@ -46,8 +46,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-member-expression-to-functions": "^7.10.1",
+    "@babel/plugin-transform-object-assign": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
     "@types/aws-lambda": "^8.10.56",
     "@types/react-audio-player": "^0.11.0",
+    "babel-loader": "^8.1.0",
     "netlify-lambda": "^1.6.3"
   }
 }

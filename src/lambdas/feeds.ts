@@ -2,13 +2,19 @@ import axios from 'axios';
 import { Context } from 'aws-lambda';
 
 export async function handler(event: any, context: Context) {
-  const query = event.queryStringParameters.query;
+  const feedUrl = event.queryStringParameters.feedUrl;
+  console.info(feedUrl);
   try {
-    const response = await axios.get(`https://itunes.apple.com/search?term=${query}&media=podcast`);
+    const response = await axios.get(`${feedUrl}?format=xml`, {
+      headers: {
+        'Content-Type': 'application/xhtml+xml'
+      }
+    });
+
     return {
       statusCode: 200,
       headers: corsHeaders,
-      body: JSON.stringify(response.data)
+      body: response.data
     };
   } catch (err) {
     console.error(err);
