@@ -19,6 +19,7 @@
     "react-audio-player": "^0.13.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "throttle-debounce": "^2.2.1",
     "typescript": "~3.7.2",
     "xmldom": "^0.3.0"
   },
@@ -53,6 +54,7 @@
     "@babel/preset-typescript": "^7.10.1",
     "@types/aws-lambda": "^8.10.56",
     "@types/react-audio-player": "^0.11.0",
+    "@types/throttle-debounce": "^2.1.0",
     "@types/xmldom": "^0.1.29",
     "babel-loader": "^8.1.0",
     "netlify-lambda": "^1.6.3",
